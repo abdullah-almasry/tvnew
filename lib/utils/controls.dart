@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:chillyflix/Tabs/Radio.dart';
 import 'package:flutter_exoplayer/audio_notification.dart';
 import 'package:flutter_exoplayer/audioplayer.dart';
@@ -94,6 +93,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                         color: Colors.pink,
                         borderRadius: BorderRadius.circular(5)),
                     child: FlatButton(
+                      focusColor: Colors.amber,
                       child: Center(
                         child: Text(
                           "Play",
@@ -119,6 +119,7 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                         color: Colors.pink,
                         borderRadius: BorderRadius.circular(5)),
                     child: FlatButton(
+                      focusColor: Colors.amber,
                       child: Center(
                         child: Text(
                           "Stop",
@@ -134,56 +135,17 @@ class _PlayerWidgetState extends State<PlayerWidget> {
                   ),
                 ),
               ),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Container(
-                    width: 70,
-                    height: 45,
-                    decoration: BoxDecoration(
-                        color: Colors.pink,
-                        borderRadius: BorderRadius.circular(5)),
-                    child: FlatButton(
-                      child: Center(
-                        child: Text(
-                          "Release",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      onPressed: () => _release(),
-                    ),
-                  ),
-                ),
-              ),
             ],
           ),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 20),
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              IconButton(
-                  onPressed: () => _previous(),
-                  iconSize: 45.0,
-                  icon: Icon(Icons.skip_previous),
-                  color: Colors.pink),
-              IconButton(
-                  onPressed: _isPlaying ? () => _pause() : () => _resume(),
-                  iconSize: 45.0,
-                  icon: _isPlaying ? Icon(Icons.pause) : Icon(Icons.play_arrow),
-                  color: Colors.pink),
-              IconButton(
-                  onPressed: () => _next(),
-                  iconSize: 45.0,
-                  icon: Icon(Icons.skip_next),
-                  color: Colors.pink),
-            ],
-          ),
+          child: IconButton(
+              focusColor: Colors.amber,
+              onPressed: _isPlaying ? () => _pause() : () => _resume(),
+              iconSize: 45.0,
+              icon: _isPlaying ? Icon(Icons.pause) : Icon(Icons.play_arrow),
+              color: Colors.pink),
         ),
         Row(
           mainAxisSize: MainAxisSize.max,
@@ -230,22 +192,22 @@ class _PlayerWidgetState extends State<PlayerWidget> {
     });
     _playerStateSubscription =
         _audioPlayer.onPlayerStateChanged.listen((playerState) {
-      setState(() {
-        _playerState = playerState;
-        print(_playerState);
-      });
-    });
+          setState(() {
+            _playerState = playerState;
+            print(_playerState);
+          });
+        });
     _playerIndexSubscription =
         _audioPlayer.onCurrentAudioIndexChanged.listen((index) {
-      setState(() {
-        _position = Duration(milliseconds: 0);
-        _currentIndex = index;
-      });
-    });
+          setState(() {
+            _position = Duration(milliseconds: 0);
+            _currentIndex = index;
+          });
+        });
     _playerAudioSessionIdSubscription =
         _audioPlayer.onAudioSessionIdChange.listen((audioSessionId) {
-      print("audio Session Id: $audioSessionId");
-    });
+          print("audio Session Id: $audioSessionId");
+        });
     _notificationActionCallbackSubscription = _audioPlayer
         .onNotificationActionCallback
         .listen((notificationActionName) {

@@ -1,5 +1,4 @@
-
-import 'package:chillyflix/Widgets/player_widget.dart';
+import 'package:chillyflix/utils/controls.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/services.dart';
@@ -63,11 +62,10 @@ class _RadioAudioState extends State<RadioAudio> {
       ),
       body: Container(
         child:
-          remoteUrl(),
+        remoteUrl(),
 
 
       ),
     );
   }
 }
-

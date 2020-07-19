@@ -1,3 +1,4 @@
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class MyApp extends StatelessWidget {
 
     return Shortcuts(
       // needed for AndroidTV to be able to select
-      shortcuts: {LogicalKeySet(LogicalKeyboardKey.select): const Intent(ActivateAction.key)},
+      shortcuts: {LogicalKeySet(LogicalKeyboardKey.select): const ActivateIntent(),},
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Norway Voice Tv',
